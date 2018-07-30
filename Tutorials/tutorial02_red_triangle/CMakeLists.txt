@@ -4,9 +4,12 @@ project (tutorial02)
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/_embedded_data.cpp
     COMMAND $<TARGET_FILE:embed>
-    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleFragmentShader.fragmentshader
     ${CMAKE_CURRENT_SOURCE_DIR}/SimpleVertexShader.vertexshader
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleFragmentShader.fragmentshader
     > ${CMAKE_CURRENT_SOURCE_DIR}/_embedded_data.cpp
+    DEPENDS embed
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleVertexShader.vertexshader
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleFragmentShader.fragmentshader
 )
 
 add_executable(tutorial02

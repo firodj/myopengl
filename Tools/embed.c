@@ -94,6 +94,7 @@ int main(int argc, char *argv[]) {
             }
           }
         }
+        if (c) putchar('"');
         printf(";\n");
       } else {
         printf("static const unsigned char v%d[] = {", i);
