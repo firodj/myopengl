@@ -55,3 +55,39 @@ include_directories(
 ### GLM ###
 
 add_subdirectory (Externals/glm)
+
+include_directories(
+  Externals/glm
+)
+
+### Tools
+
+add_executable(embed
+  Tools/embed.c
+)
+
+### Tutorials
+
+include_directories(Tutorials)
+
+# Tutorial 1
+add_executable(tutorial01
+	Tutorials/tutorial01_first_window/tutorial01.cpp
+)
+target_link_libraries(tutorial01
+  ${OPENGL_LIBRARY}
+  glfw
+  glew
+)
+
+# Tutorial 2
+add_executable(tutorial02
+	Tutorials/tutorial02_red_triangle/tutorial02.cpp
+	Tutorials/tutorial02_red_triangle/embedded_data.cpp
+  Tutorials/common/shader.cpp
+)
+target_link_libraries(tutorial02
+  ${OPENGL_LIBRARY}
+  glfw
+  glew
+)

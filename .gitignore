@@ -1,3 +1,7 @@
 /build
 /output
 .peru/
+/Externals
+/Tutorials/external
+/Tutorials/distrib
+/Tutorials/*/screenshots
