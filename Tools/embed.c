@@ -55,13 +55,42 @@ int main(int argc, char *argv[]) {
       rewind(fp);
 
       if (is_text) {
-        printf("static const unsigned char v%d[] = \"", i);
+        int is_comment = 0;
+        int c = 0;
+        int s = 0;
+        printf("static const unsigned char v%d[] = ", i);
         for (j = 0; (ch = fgetc(fp)) != EOF; j++) {
-          switch (ch) {
-            case '\n': printf("\\n\"\n\""); break;
-            case '\r': break;
-            case '"': printf("\\\""); break;
-            default: putchar(ch);
+          if (is_comment >= 2) {
+            if (ch == '\n') {
+              is_comment = 0; c = 0; s = 0;
+            }
+            putchar(ch);
+          } else {
+            switch (ch) {
+              case '\n':
+                if (c) {
+                  printf("\\n\"\n");
+                  c = 0; s = 0;
+                }
+                is_comment = 0;
+                break;
+              case '\r': break;
+              case '/': is_comment++;
+                if (is_comment == 2) {
+                  if (c) printf("\\n\" ");
+                  printf("//");
+                }
+                break;
+              case '"': if (c == 0) putchar('"'); printf("\\\""); break;
+              default: 
+                if (ch == ' ') s++;
+                else {
+                  if (c == 0) putchar('"');
+                  for(;s;--s) putchar(' ');
+                  putchar(ch);
+                  c++;
+                }
+            }
           }
         }
         printf("\";\n");

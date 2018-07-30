@@ -70,14 +70,5 @@ add_executable(embed
 
 include_directories(Tutorials)
 
-# Tutorial 1
-add_executable(tutorial01
-	Tutorials/tutorial01_first_window/tutorial01.cpp
-)
-target_link_libraries(tutorial01
-  ${OPENGL_LIBRARY}
-  glfw
-  glad
-)
-
+add_subdirectory(Tutorials/tutorial01_first_window)
 add_subdirectory(Tutorials/tutorial02_red_triangle)
