@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Include GLEW
-#include <GL/glew.h>
+// Include GLAD
+#include <glad/glad.h>
 
 // Include GLFW
 #include <GLFW/glfw3.h>
@@ -37,16 +37,15 @@ int main( void )
 		glfwTerminate();
 		return -1;
 	}
+
+	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 
-	// Initialize GLEW
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		getchar();
-		glfwTerminate();
-		return -1;
-	}
+	/* Load GLAD */
+	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
+	printf("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
+	
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
@@ -62,6 +61,8 @@ int main( void )
 		
 		// Swap buffers
 		glfwSwapBuffers(window);
+
+		// Poll for and process events
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed

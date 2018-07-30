@@ -1,7 +1,7 @@
 imports:
-    opengl_tutorial: Tutorials/
+    opengl_tutorial: Tutorials_/
     glfw: Externals/glfw
-    glew: Externals/glew
+    glad: Externals/glad
     glm: Externals/glm
 
 git module opengl_tutorial:
@@ -13,12 +13,11 @@ git module glfw:
     rev: 0be4f3f75aebd9d24583ee86590a38e741db0904
     reup: master
 
-git module glew:
-    url: https://github.com/nigels-com/glew.git
-    rev: e544f8c12d209618fd69bccd3c4414893c142ba7
-    reup: master
-
 git module glm:
     url: https://github.com/g-truc/glm.git
     rev: 7e3f42eeda586194c4d0f84d87e0e4e6ffcce7a5
+    reup: master
+
+git module glad:
+    url: https://github.com/Dav1dde/glad.git
     reup: master

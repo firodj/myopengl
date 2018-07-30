@@ -44,12 +44,12 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
-### GLEW ###
+### GLAD ###
 
-add_subdirectory (Externals/glew/build/cmake)
+add_subdirectory (Externals/glad)
 
 include_directories(
-  Externals/glew/include/
+  ${GLAD_BINARY_DIR}/include
 )
 
 ### GLM ###
@@ -77,17 +77,7 @@ add_executable(tutorial01
 target_link_libraries(tutorial01
   ${OPENGL_LIBRARY}
   glfw
-  glew
+  glad
 )
 
-# Tutorial 2
-add_executable(tutorial02
-	Tutorials/tutorial02_red_triangle/tutorial02.cpp
-	Tutorials/tutorial02_red_triangle/embedded_data.cpp
-  Tutorials/common/shader.cpp
-)
-target_link_libraries(tutorial02
-  ${OPENGL_LIBRARY}
-  glfw
-  glew
-)
+add_subdirectory(Tutorials/tutorial02_red_triangle)

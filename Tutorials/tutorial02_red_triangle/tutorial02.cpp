@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Include GLEW
-#include <GL/glew.h>
+// Include GLAD
+#include <glad/glad.h>
 
 // Include GLFW
 #include <GLFW/glfw3.h>
@@ -43,14 +43,10 @@ int main( void )
 	}
 	glfwMakeContextCurrent(window);
 
-	// Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		getchar();
-		glfwTerminate();
-		return -1;
-	}
+	// Initialize GLAD
+	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+
+	printf("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
 
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -122,4 +118,3 @@ int main( void )
 
 	return 0;
 }
-

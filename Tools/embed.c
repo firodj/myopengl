@@ -58,9 +58,9 @@ int main(int argc, char *argv[]) {
         printf("static const unsigned char v%d[] = \"", i);
         for (j = 0; (ch = fgetc(fp)) != EOF; j++) {
           switch (ch) {
-            case '\n': printf("\\n\\\n"); break;
-            case '\r': printf("\\r"); break;
-            case '"': printf("\\");
+            case '\n': printf("\\n\"\n\""); break;
+            case '\r': break;
+            case '"': printf("\\\""); break;
             default: putchar(ch);
           }
         }
