@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
                 }
                 is_comment = 0;
                 break;
+              case '\t': s += 2; break;
               case '\r': break;
               case '/': is_comment++;
                 if (is_comment == 2) {
@@ -93,7 +94,7 @@ int main(int argc, char *argv[]) {
             }
           }
         }
-        printf("\";\n");
+        printf(";\n");
       } else {
         printf("static const unsigned char v%d[] = {", i);
         for (j = 0; (ch = fgetc(fp)) != EOF; j++) {

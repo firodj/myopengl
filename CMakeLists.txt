@@ -72,3 +72,4 @@ include_directories(Tutorials)
 
 add_subdirectory(Tutorials/tutorial01_first_window)
 add_subdirectory(Tutorials/tutorial02_red_triangle)
+add_subdirectory(Tutorials/tutorial03_matrices)
