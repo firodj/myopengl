@@ -1,15 +1,16 @@
 cmake_minimum_required (VERSION 3.4)
 project (tutorial03)
 
+set(GLSL_SRC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleTransform.glsl
+    ${CMAKE_CURRENT_SOURCE_DIR}/SingleColor.glsl
+)
+
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/_embedded_data.cpp
-    COMMAND $<TARGET_FILE:embed>
-    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleTransform.vertexshader
-    ${CMAKE_CURRENT_SOURCE_DIR}/SingleColor.fragmentshader
+    COMMAND $<TARGET_FILE:embed> ${GLSL_SRC}
     > ${CMAKE_CURRENT_SOURCE_DIR}/_embedded_data.cpp
-    DEPENDS embed
-    ${CMAKE_CURRENT_SOURCE_DIR}/SimpleTransform.vertexshader
-    ${CMAKE_CURRENT_SOURCE_DIR}/SingleColor.fragmentshader
+    DEPENDS embed ${GLSL_SRC}
 )
 
 add_executable(tutorial03

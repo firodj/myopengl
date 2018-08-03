@@ -59,8 +59,8 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	const char *VertexShaderCode = find_embedded_file("SimpleTransform.vertexshader", NULL);
-	const char *FragmentShaderCode = find_embedded_file("SingleColor.fragmentshader", NULL);
+	const char *VertexShaderCode = find_embedded_file("SimpleTransform.glsl", NULL);
+	const char *FragmentShaderCode = find_embedded_file("SingleColor.glsl", NULL);
 
 	GLuint programID = LoadEmbeddedShaders( VertexShaderCode, FragmentShaderCode );
 
