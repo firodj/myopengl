@@ -1,7 +1,16 @@
 imports:
     opengl_tutorial: Tutorials_/
+    nothings_stb|stb_image: Tools/
 
 git module opengl_tutorial:
     url: https://github.com/opengl-tutorials/ogl
     rev: 316cccc5f76f47f09c16089d98be284b689e057d
     reup: master
+
+git module nothings_stb:
+    url: https://github.com/nothings/stb.git
+    reup: master
+    rev: e6afb9cbae4064da8c3e69af3ff5c4629579c1d2
+
+rule stb_image:
+    pick: stb_image.h

@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
 
   printf("#include <stdlib.h>\n");
   printf("#include <string.h>\n\n");
-  printf("const char *find_embedded_file(const char *name, size_t *size);\n\n");
   
   for (i = 1; i < argc; i++) {
     if ((fp = fopen(argv[i], "rb")) == NULL) {

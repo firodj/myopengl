@@ -63,7 +63,11 @@ include_directories(
 ### Tools
 
 add_executable(embed
-  Tools/embed.c
+  Tools/embed.cpp
+)
+
+include_directories(
+  Tools/
 )
 
 ### Tutorials
@@ -74,4 +78,5 @@ add_subdirectory(Tutorials/tutorial01_first_window)
 add_subdirectory(Tutorials/tutorial02_red_triangle)
 add_subdirectory(Tutorials/tutorial03_matrices)
 add_subdirectory(Tutorials/tutorial04_colored_cube)
+add_subdirectory(Tutorials/tutorial05_textured_cube)
 add_subdirectory(Tutorials/quick_glfw)
