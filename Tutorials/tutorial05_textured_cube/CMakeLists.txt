@@ -18,6 +18,7 @@ add_executable(tutorial05
     tutorial05.cpp
     _embedded_data.cpp
     ../common/shader.cpp
+    ../common/texture.cpp
 )
 
 target_link_libraries(tutorial05

@@ -14,9 +14,7 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <common/shader.hpp>
-
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <common/texture.hpp>
 #include <embed.h>
 
 int main( void )
@@ -85,35 +83,7 @@ int main( void )
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	glm::mat4 MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
 
-	// Load the texture using any two methods
-	//GLuint Texture = loadBMP_custom("uvtemplate.bmp");
-	//GLuint Texture = loadDDS("uvtemplate.DDS");
-	int width, height, channel;
-	unsigned char *data = stbi_load_from_memory((const stbi_uc *)TextureInRAM, TextureInRAMSize, &width, &height, &channel, 0);
-	
-	// Create one OpenGL texture
-	GLuint Texture;
-	glGenTextures(1, &Texture);
-	
-	// "Bind" the newly created texture : all future texture functions will modify this texture
-	glBindTexture(GL_TEXTURE_2D, Texture);
-
-	// Give the image to OpenGL
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-	
-	stbi_image_free(data);
-
-	// Poor filtering, or ...
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-
-	// ... nice trilinear filtering ...
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	// ... which requires mipmaps. Generate them automatically.
-	glGenerateMipmap(GL_TEXTURE_2D);
+	GLuint Texture = loadEmbeddedTexture(TextureInRAM, TextureInRAMSize);
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
