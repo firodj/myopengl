@@ -34,6 +34,7 @@ static const char *code =
   "      return (const char *) p->data;\n"
   "    }\n"
   "  }\n"
+  "  fprintf(stderr, \"Embedded not found: %s\", name);\n"
   "  return NULL;\n"
   "}\n";
 
@@ -42,6 +43,7 @@ int main(int argc, char *argv[]) {
   int i, j, ch;
   int is_text;
 
+  printf("#include <stdio.h>\n");
   printf("#include <stdlib.h>\n");
   printf("#include <string.h>\n\n");
   
