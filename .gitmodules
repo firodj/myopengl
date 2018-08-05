@@ -6,4 +6,4 @@
 	url = https://github.com/g-truc/glm.git
 [submodule "Externals/glad"]
 	path = Externals/glad
-	url = https://github.com/Dav1dde/glad.git
+	url = https://github.com/firodj/glad.git
