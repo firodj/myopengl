@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,18 +11,37 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <stbi_DDS.h>
+#include "texture.hpp"
+
+GLuint loadTexture(const char * image_path){
+	std::ifstream TextureStream(image_path, std::ios::in | std::ios::binary);
+	if(TextureStream.is_open()){
+		std::vector<char> buffer((
+            std::istreambuf_iterator<char>(TextureStream)), 
+            (std::istreambuf_iterator<char>()));
+		TextureStream.close();
+
+		return loadEmbeddedTexture(&buffer[0], buffer.size());
+	} else{
+		std::cout << "Impossible to open " << image_path << ". "
+			<< "Are you in the right directory ? Don't forget to read the FAQ !" << std::endl;
+		return 0;
+	}
+}
 
 GLuint loadEmbeddedTexture(const char * data, size_t size)
 {
 	// Load the texture using any two methods
-	//GLuint Texture = loadBMP_custom("uvtemplate.bmp");
-	//GLuint Texture = loadDDS("uvtemplate.DDS");
 	int width, height, channel;
 	unsigned char *raw = nullptr;
 
-	if (stbi_dds_test_memory((const stbi_uc* )data, size))
-		raw = stbi_dds_load_from_memory((const stbi_uc *)data, size, &width, &height, &channel, 0);
-	else
+	if (stbi_dds_test_memory((const stbi_uc* )data, size)) {
+		if (GL_EXT_texture_compression_s3tc) {
+			return direct_load_DDS_from_memory(data, size);
+		} else {
+			raw = stbi_dds_load_from_memory((const stbi_uc *)data, size, &width, &height, &channel, 0);
+		}
+	} else
 		raw	= stbi_load_from_memory((const stbi_uc *)data, size, &width, &height, &channel, 0);
 	
 	// Create one OpenGL texture

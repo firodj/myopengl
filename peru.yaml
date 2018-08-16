@@ -1,6 +1,7 @@
 imports:
     opengl_tutorial: Tutorials_/
     nothings_stb|stb_image: Tools/
+    tinyobjloader|loader: Tools/
 
 git module opengl_tutorial:
     url: https://github.com/opengl-tutorials/ogl
@@ -14,3 +15,10 @@ git module nothings_stb:
 
 rule stb_image:
     pick: stb_image.h
+
+git module tinyobjloader:
+    url: https://github.com/syoyo/tinyobjloader.git
+    reup: master
+
+rule loader:
+    pick: tiny_obj_loader.h 
